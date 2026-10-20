@@ -8,6 +8,9 @@ venv/
 *.db
 *.sqlite3
 
+# Raw datasets (fetched by scripts/fetch_real_dataset.py — keep out of git)
+backend/data/*.csv
+
 # Node / Next.js
 node_modules/
 .next/
@@ -21,6 +24,7 @@ out/
 # Build artifacts
 dist/
 build/
+*.tsbuildinfo
 
 # Logs
 *.log

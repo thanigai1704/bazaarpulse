@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api import insights, products
+from .api import analysis, insights, products
 from .config import get_settings
 from .database import Base, SessionLocal, engine
 from .scheduler import start_scheduler, stop_scheduler
@@ -82,6 +82,7 @@ app.add_middleware(
 
 app.include_router(products.router)
 app.include_router(insights.router)
+app.include_router(analysis.router)
 
 
 @app.get("/health")

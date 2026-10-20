@@ -2,6 +2,7 @@
 
 import type {
   KpiSnapshot,
+  MarketAnalysis,
   MarketSummary,
   MoverItem,
   Product,
@@ -81,4 +82,6 @@ export const api = {
     request<SentimentLeader[]>(`/insights/sentiment-leaders`),
 
   summary: (): Promise<MarketSummary> => request<MarketSummary>(`/insights/summary`),
+
+  analysis: (): Promise<MarketAnalysis> => request<MarketAnalysis>(`/analysis`),
 };

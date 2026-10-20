@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, LayoutDashboard, LineChart, Sun, Moon, Zap } from "lucide-react";
+import { Activity, BarChart3, LayoutDashboard, LineChart, Sun, Moon, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -13,6 +13,7 @@ const NAV = [
   { href: "/", label: "Home", icon: Activity },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/insights", label: "Market Insights", icon: LineChart },
+  { href: "/analysis", label: "Analysis", icon: BarChart3 },
 ];
 
 function ThemeToggle() {

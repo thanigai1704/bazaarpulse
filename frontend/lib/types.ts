@@ -99,6 +99,107 @@ export interface MarketSummary {
   generated_at: string;
 }
 
+/** GET /analysis — descriptive statistics over the real catalogue. */
+export interface AnalysisOverview {
+  listings: number;
+  categories: number;
+  brands: number;
+  price_min: number;
+  price_median: number;
+  price_mean: number;
+  price_max: number;
+  mean_discount_pct: number;
+  median_discount_pct: number;
+  total_listings_worth: number;
+}
+
+export interface AnalysisDataQuality {
+  rating_coverage_pct: number;
+  rated_listings: number;
+  unrated_listings: number;
+  brand_coverage_pct: number;
+  duplicate_name_pct: number;
+  duplicate_names: number;
+  discounted_share_pct: number;
+  rated_vs_unrated: {
+    rated_mean_price: number | null;
+    unrated_mean_price: number | null;
+    rated_mean_discount_pct: number | null;
+    unrated_mean_discount_pct: number | null;
+  };
+}
+
+export interface PriceDispersionRow {
+  category: string;
+  listings: number;
+  min: number;
+  q25: number;
+  median: number;
+  q75: number;
+  max: number;
+  mean: number;
+  std: number;
+  cv: number | null;
+  skewness: number;
+  iqr: number;
+}
+
+export interface DiscountDepthRow {
+  category: string;
+  listings: number;
+  mean_discount_pct: number;
+  median_discount_pct: number;
+  p90_discount_pct: number;
+  max_discount_pct: number;
+  share_discounted_pct: number;
+  mean_vs_median_gap: number;
+}
+
+export interface BrandConcentration {
+  hhi: number;
+  interpretation: string;
+  top5_share_pct: number;
+  top10_share_pct: number;
+  pareto_brand_count: number;
+  pareto_brand_pct: number;
+  top_brands: { brand: string; listings: number; share_pct: number }[];
+}
+
+export interface AnalysisCorrelations {
+  discount_vs_rating_r: number | null;
+  discount_vs_rating_n: number;
+  discount_vs_rating_note: string;
+  price_vs_discount_r: number | null;
+  log_price_vs_rating_r: number | null;
+  price_vs_discount_note: string;
+}
+
+export interface AnalysisOutliers {
+  rule: string;
+  outlier_count: number;
+  outlier_share_pct: number;
+  outlier_median_price: number | null;
+  top_outliers: {
+    id: string;
+    name: string;
+    brand: string;
+    category: string;
+    price: number;
+    category_median: number;
+    vs_median_x: number;
+  }[];
+}
+
+export interface MarketAnalysis {
+  overview: AnalysisOverview;
+  data_quality: AnalysisDataQuality;
+  price_dispersion: PriceDispersionRow[];
+  discount_depth: DiscountDepthRow[];
+  brand_concentration: BrandConcentration;
+  correlations: AnalysisCorrelations;
+  outliers: AnalysisOutliers;
+}
+
 /** WebSocket live events pushed by /ws/live-updates. */
 export type LiveEventType =
   | "price_update"
